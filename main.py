@@ -1,3 +1,5 @@
+import random
+
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -107,38 +109,68 @@ class Reviewer (Mentor):
         return (f'Имя: {self.name} '
                 f'\nФамилия: {self.surname}')
 
+def all_average_marks(set_object, course):
+    all_marks = []
+    for object in set_object:
+        for mark in object.grades[course]:
+            all_marks.append(mark)
+    average_mark = sum(all_marks) / len(all_marks)
+    return average_mark
+
+
+courses = ['Python', 'Git']
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-best_student.courses_in_progress += ['Git']
+best_student.courses_in_progress += courses
 
+best_student1 = Student('Ruba', 'Da', 'your_gender')
+best_student1.courses_in_progress += courses
 
 cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
-cool_mentor.courses_attached += ['Git']
+cool_mentor.courses_attached += courses
 
+normal_lecturer = Lecturer('Roy', 'Kin')
+normal_lecturer.courses_attached += courses
 
+soso_lecturer = Lecturer('Samir', 'Nasri')
+soso_lecturer.courses_attached += courses
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Git', 10)
+all_students = [best_student, best_student1]
+all_lecturers = [normal_lecturer, soso_lecturer]
+
+for course in courses:
+    for mark in range(0, 5):
+        cool_mentor.rate_hw(best_student, course, random.randrange(1, 10))
+        cool_mentor.rate_hw(best_student1, course, random.randrange(1, 10))
+        best_student.give_lecture_grade(normal_lecturer, course, random.randrange(1, 10))
+        best_student.give_lecture_grade(soso_lecturer, course, random.randrange(1, 10))
 
 best_student.average_hm()
-
-
-best_student1 = Student('Ruoy1', 'Eman1', 'your_gender')
-best_student1.courses_in_progress += ['Python']
-best_student1.courses_in_progress += ['Git']
-
-
-cool_mentor.rate_hw(best_student1, 'Python', 10)
-cool_mentor.rate_hw(best_student1, 'Python', 10)
-cool_mentor.rate_hw(best_student1, 'Python', 8)
-cool_mentor.rate_hw(best_student1, 'Git', 8)
-
 best_student1.average_hm()
 
-print(best_student1.average)
+normal_lecturer.average_grade()
+soso_lecturer.average_grade()
 
+
+print(best_student.average)
+print(best_student1.average)
+print(normal_lecturer.average)
+print(soso_lecturer.average)
+
+print(best_student.__gt__(best_student1))
+print(best_student.__lt__(best_student1))
+print(best_student.__ge__(best_student1))
 print(best_student.__le__(best_student1))
+print(best_student.__eq__(best_student1))
+
+print(normal_lecturer.__gt__(soso_lecturer))
+print(normal_lecturer.__lt__(soso_lecturer))
+print(normal_lecturer.__ge__(soso_lecturer))
+print(normal_lecturer.__le__(soso_lecturer))
+print(normal_lecturer.__eq__(soso_lecturer))
+
+print(all_average_marks(all_students, 'Python'))
+print(all_average_marks(all_students, 'Git'))
+print(all_average_marks(all_lecturers, 'Python'))
+print(all_average_marks(all_lecturers, 'Git'))
+
