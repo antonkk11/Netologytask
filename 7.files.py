@@ -25,7 +25,7 @@ def getdictionary(file):
         dictionary.setdefault(set_recipe[0], ingredients)
     return dictionary
 
-# cookbook = getdictionary('recipes.txt')
+cookbook = getdictionary('recipes.txt')
 
 def get_shop_list_by_dishes(dishes, person_count):
     ingredients_dict = {}
@@ -44,9 +44,9 @@ def get_shop_list_by_dishes(dishes, person_count):
 
     return ingredients_dict
 
-# dishes = ['Омлет', 'Фахитос']
-# ingredients = get_shop_list_by_dishes(dishes, 4)
-#
+dishes = ['Омлет', 'Фахитос']
+ingredients = get_shop_list_by_dishes(dishes, 4)
+
 name_files = ['1.txt', '2.txt', '3.txt']
 
 def append_file(set_files):
@@ -67,9 +67,3 @@ def append_file(set_files):
             f.write('\n')
 
 append_file(name_files)
-
-
-
-
-
-
